@@ -1,0 +1,52 @@
+{
+  "$schema": "https://biomejs.dev/schemas/1.8.3/schema.json",
+  "organizeImports": {
+    "enabled": true
+  },
+  "linter": {
+    "enabled": true,
+    "ignore": [
+      "test/**",
+      "dist/**",
+      "node_modules/**",
+      "src/**/*.test.ts",
+      "src/**/*.spec.ts",
+      "prisma/**"
+    ],
+    "rules": {
+      "recommended": true,
+      "suspicious": {
+        "noImplicitAnyLet": "warn",
+        "noEmptyInterface": "error",
+        "noMisleadingInstantiator": "error",
+        "useAwait": "warn"
+      },
+      "correctness": {
+        "noUnusedImports": "error",
+        "noUnusedVariables": "error",
+        "noUnusedPrivateClassMembers": "warn"
+      },
+      "complexity": {
+        "useOptionalChain": "warn"
+      },
+      "style": {
+        "noUnusedTemplateLiteral": "error",
+        "useExportType": "warn"
+      }
+    }
+  },
+  "formatter": {
+    "ignore": ["dist/**", "node_modules/**", "test/**", "prisma/**"],
+    "enabled": true,
+    "formatWithErrors": false,
+    "indentStyle": "tab",
+    "include": ["src/**"],
+    "lineEnding": "lf",
+    "attributePosition": "auto",
+    "indentWidth": 2,
+    "lineWidth": 100
+  },
+  "files": {
+    "ignore": ["dist/**", "node_modules/**", "test/**", "prisma/**"]
+  }
+}
