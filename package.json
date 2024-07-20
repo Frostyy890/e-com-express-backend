@@ -8,6 +8,10 @@
     "start": "node dist/app.js",
     "start:dev": "nodemon src/app.ts",
     "start:prod": "tsc",
+    "docker:dev": "docker compose -f docker-compose.dev.yml up --build -d",
+    "docker:down": "docker compose -f docker-compose.dev.yml down",
+    "docker:purge": "docker compose -f docker-compose.dev.yml down -v",
+    "db:migrate": "docker compose -f docker-compose.dev.yml exec api pnpm prisma migrate dev --name init",
     "lint": "pnpm biome lint ./src",
     "lint:fix": "pnpm biome lint --apply ./src",
     "format": "pnpm biome format ./src",
@@ -21,12 +25,14 @@
     "@types/express": "^4.17.21",
     "@types/node": "^20.14.11",
     "nodemon": "^3.1.4",
+    "prisma": "^5.17.0",
     "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",
     "tsx": "^4.16.2",
     "typescript": "^5.5.3"
   },
   "dependencies": {
+    "@prisma/client": "5.17.0",
     "dotenv": "^16.4.5",
     "express": "^4.19.2"
   }

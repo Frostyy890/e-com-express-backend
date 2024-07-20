@@ -7,8 +7,8 @@ services:
   api:
     build:
       context: .
-      dockerfile: Dockerfile.dev
-    image: express_server:latest
+      target: build
+      dockerfile: Dockerfile
     ports:
       - "3000:3000"
     env_file:
@@ -16,7 +16,8 @@ services:
     depends_on:
       - postgres
     volumes:
-      - ./src:/usr/src/app/src
+      - ./:/app
+      - /app/node_modules
     command: pnpm start:dev
   postgres:
     container_name: postgres
