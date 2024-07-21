@@ -11,7 +11,9 @@ export enum ENV {
 interface IAppConfig {
   port: number;
   env: ENV;
-  db: {};
+  hashing: {
+    saltRounds: number;
+  };
 }
 
 function getEnvVar(key: string, defaultValue?: string) {
@@ -26,5 +28,7 @@ function getEnvVar(key: string, defaultValue?: string) {
 export const appConfig: IAppConfig = {
   port: Number.parseInt(getEnvVar("PORT", "3000")),
   env: getEnvVar("NODE_ENV", ENV.DEV) as ENV,
-  db: {},
+  hashing: {
+    saltRounds: Number.parseInt(getEnvVar("SALT_ROUNDS", "10")),
+  },
 };
