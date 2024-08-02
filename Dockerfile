@@ -25,12 +25,7 @@ ENTRYPOINT [ "./start.sh" ]
 FROM node:20.6.1 AS production
 # Set working directory
 WORKDIR /app
-
-# Copy files from base
-COPY package*.json pnpm-lock.yaml ./
-
-RUN pnpm install --only=production
-
+# Copy necessary files
 COPY --from=build /app/dist ./dist
 
 CMD [ "node", "dist/app.js" ]

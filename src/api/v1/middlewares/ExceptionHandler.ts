@@ -15,7 +15,7 @@ const ExceptionsFactory = (err: Error, res: Response) => {
   }
   // Handle Prisma Errors
   if (err instanceof Prisma.PrismaClientKnownRequestError) {
-    console.log(JSON.stringify(err, null, 2));
+    // console.log(JSON.stringify(err, null, 2));
     if (err.code === "P2002") {
       return res.status(HttpStatusCodes.CONFLICT).send({
         errors: [
@@ -27,12 +27,19 @@ const ExceptionsFactory = (err: Error, res: Response) => {
         ],
       });
     }
-    return res.status(HttpStatusCodes.BAD_REQUEST).send({ errors: [{ detail: "Bad Request" }] });
+    return res
+      .status(HttpStatusCodes.BAD_REQUEST)
+      .send({ errors: [{ detail: "Bad Request" }] });
   }
   return null;
 };
 
-export const ExceptionHandler = (err: Error, _req: Request, res: Response, _next: NextFunction) => {
+export const ExceptionHandler = (
+  err: Error,
+  _req: Request,
+  res: Response,
+  _next: NextFunction
+) => {
   const handledError = ExceptionsFactory(err, res);
   if (handledError) return handledError;
   console.error("Unhandled exception:", JSON.stringify(err, null, 2));

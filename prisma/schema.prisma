@@ -15,9 +15,28 @@ model User {
   role      Role     @default(USER)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  sessions Session[]
 }
 
 enum Role {
   USER
   ADMIN
+}
+
+enum SessionStatus {
+  ACTIVE
+  EXPIRED
+  REVOKED
+}
+
+model Session {
+  id String @id @default(cuid())
+  userId String @db.VarChar(255)
+  refreshToken String @unique @db.VarChar(255)
+  status SessionStatus @default(ACTIVE)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  expiresAt DateTime 
+  user User @relation(fields: [userId], references: [id])
 }
