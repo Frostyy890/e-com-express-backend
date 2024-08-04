@@ -33,10 +33,10 @@ enum SessionStatus {
 model Session {
   id String @id @default(cuid())
   userId String @db.VarChar(255)
-  refreshToken String @unique @db.VarChar(255)
+  refreshToken String @unique @db.VarChar(255) @default("")
   status SessionStatus @default(ACTIVE)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  expiresAt DateTime 
+  expiresAt DateTime @default(now())
   user User @relation(fields: [userId], references: [id])
 }

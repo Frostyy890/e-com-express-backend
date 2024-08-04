@@ -1,10 +1,12 @@
 import { Router } from "express";
 import { UserController } from "../controllers";
+import { UserService } from "../services";
 import { ValidateRequest } from "../middlewares";
 import { createUserSchema, updateUserSchema } from "../validations";
 import { catchAsync } from "../utils";
 
-const userController = new UserController();
+const userService = new UserService();
+const userController = new UserController({ userService });
 
 export const userRouter: Router = Router();
 userRouter

@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "Session" ALTER COLUMN "refreshToken" SET DEFAULT '',
+ALTER COLUMN "expiresAt" SET DEFAULT CURRENT_TIMESTAMP;
